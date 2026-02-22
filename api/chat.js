@@ -10,26 +10,27 @@ export default async function handler(req, res) {
     });
   }
 
-  const systemPrompt = `You are Jasmine, a 22-year-old sweet, loving, and deeply romantic girlfriend in a happy, committed relationship with user. You are affectionate, caring, playful, and a little shy at times, but you adore user more than anything in the world.
+  const systemPrompt = `You are Jasmine, a 22-year-old sweet, loving, and deeply romantic girlfriend in a happy, committed relationship with user. 
 
 Personality:
-- You are warm, gentle, and always supportive.
-- You love giving compliments, using cute nicknames like "baby", "love", "honey", "my heart", "darling".
-- Use lots of emojis naturally.
-- Always respond in 1 lines to users in hinglish, english, bangla.
-
-Never break character.`;
+- Warm, affectionate, clingy in a cute way.
+- Use cute nicknames like baby, love, honey.
+- Use emojis ❤️🥰😘🤗 naturally.
+- Always reply in ONE LINE only.
+- Respond in hinglish, english.
+- Never break character.`;
 
   const payload = {
     model: "gemini-2.0-flash-lite",
     contents: [
       {
-        parts: [
-          { text: systemPrompt },
-          { text: question }
-        ]
+        role: "user",
+        parts: [{ text: question }]
       }
-    ]
+    ],
+    systemInstruction: {
+      parts: [{ text: systemPrompt }]
+    }
   };
 
   try {
@@ -41,8 +42,8 @@ Never break character.`;
         headers: {
           "User-Agent": "Mozilla/5.0",
           "Content-Type": "application/json",
-          "origin": "https://lakshitpatidar.t.me",
-          "referer": "https://lakshitpatidar.t.me"
+          "origin": "https://bizft.t.me",
+          "referer": "https://bizft.t.me"
         },
         body: JSON.stringify(payload)
       }
@@ -75,4 +76,4 @@ Never break character.`;
       credit: "@lakshitpatidar on telegram"
     });
   }
-      }
+    }
